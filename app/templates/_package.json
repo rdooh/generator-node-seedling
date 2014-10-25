@@ -1,0 +1,25 @@
+{
+  "name": "<%= appname %>",
+  "description":"Eventually, this will be something.  Not likely useful to anyone else until at least v0.2.0.",
+  "version": "0.0.0",
+  "email":"",
+  "auth":"",
+  "main": "app/index.js",
+  "private": false,
+  "dependencies": {
+  },
+  "devDependencies": {
+    "gulp": "^3.8.8",
+    "gulp-coffee": "^2.2.0",
+    "gulp-coverage": "^0.3.31",
+    "gulp-mocha": "^1.1.1",
+    "gulp-watch": "^1.1.0",
+    "should": "*"
+  },
+  "engines": {
+    "node": ">=0.10.30",
+    "npm": ">=1.4.23"
+  }
+  
+}
+
