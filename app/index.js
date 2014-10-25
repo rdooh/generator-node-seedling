@@ -39,7 +39,7 @@ var HeroGenerator = yeoman.generators.Base.extend({
         appname: this.appName
       };
       this.dest.mkdir('src');
-      this.src.template('_package.json', 'package.json', context);
+      this.src.copy('_package.json', 'package.json', context);
       this.src.copy('_gulpfile.js', 'gulpfile.js');
       this.src.copy('src/_index.coffee', 'src/index.coffee');
     },
