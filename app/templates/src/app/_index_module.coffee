@@ -1,3 +1,15 @@
+# Main file for <%= appname %>
+# 
+# @author     <%= authname %> <<%= authemail %>>
+# @package
+# @copyright  <%= year %>
+# @license    <%= license %>
+#
+# !Comment: main application
+# 
+
+
+
 #======================================
 # !Require modules
 #======================================
@@ -34,14 +46,14 @@ exports = module.exports = (config)->
     console.log "Has config.flag" if config.flag
     
     # !Modifications to 'req' object - adding module-related object
-    req.myHero =
+    req.appModule =
       # !Example: process input
       store: (data)->
-        res.myHero.data = data
+        res.appModule.data = data
         return
 
     # !Modifications to 'res' object - adding module-related object
-    res.myHero =
+    res.appModule =
       data: 'stuff'
       
     # !Call the next method in the chain

@@ -18,7 +18,7 @@ function onError(err) {
 // End Mocha errors
 
 
-
+// compiles everything - tests and builds
 gulp.task('compile', function(){
     return gulp.src(['src/**/*.coffee'])
         .pipe(coffee({bare: true}))
@@ -27,22 +27,16 @@ gulp.task('compile', function(){
 
 
 
-gulp.task('compile-test', function(){
-    return gulp.src(['test/src/**/*.coffee'])
-        .pipe(coffee({bare: true}))
-        .pipe(gulp.dest('test/build'));
-});
-
 
 gulp.task('test', ['compile'], function () {
-    return gulp.src('test/build/**/*.js', { read: false })
+    return gulp.src('build/test/**/*.js', { read: false })
         .pipe(cover.instrument({
             pattern: ['build/app/**/*.js'],
-            debugDirectory: 'test/debug'
+            debugDirectory: 'build/debug'
         }))
         .pipe(mocha().on("error", onError))
         .pipe(cover.report({
-            outFile: 'test/coverage.html'
+            outFile: 'build/coverage.html'
         }))
         .pipe(cover.enforce({
             statements: 75,
