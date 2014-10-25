@@ -66,7 +66,7 @@ var HeroGenerator = yeoman.generators.Base.extend({
       }]
     },{
       when: function (props) {
-        return props.features.indexOf('includeFeature3') !== -1;
+        return props.features.indexOf('includeFeature1') !== -1;
       },
       type: 'confirm',
       name: 'libsass',
@@ -158,16 +158,22 @@ var HeroGenerator = yeoman.generators.Base.extend({
     // Application space
     //
     test: function () {
+      var d = new Date();
+      var year = d.getFullYear();
       // The variables
       var context = {
-        // appname: this.appName
+        appname: this.appName,
+        authname: this.authName,
+        authemail: this.authEmail,
+        license: this.license,
+        year: year
       };
       // Scaffolding the test-related files
       this.dest.mkdir('build/test');
       this.dest.mkdir('build/debug');
       
       this.dest.mkdir('src/test');
-      this.src.copy('src/test/_index-test.coffee', 'src/test/index-test.coffee');
+      this.template('src/test/_index-test.coffee', 'src/test/index-test.coffee', context);
       
       // Helpers for any occassion
       this.dest.mkdir('src/test/helpers');
