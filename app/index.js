@@ -36,7 +36,7 @@ var HeroGenerator = yeoman.generators.Base.extend({
   writing: {
     app: function () {
       var context = {
-        site_name: this.appName
+        appname: this.appName
       };
       this.dest.mkdir('src');
       this.src.template('_package.json', 'package.json', context);
