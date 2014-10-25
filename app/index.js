@@ -38,7 +38,7 @@ var HeroGenerator = yeoman.generators.Base.extend({
         name: 'NodeJS Module',
         value: 'nodeModule'
       }]
-      ,default: 1
+      ,default: 0
     },{
       type: 'list',
       name: 'license',
@@ -50,23 +50,23 @@ var HeroGenerator = yeoman.generators.Base.extend({
         name: 'GPL',
         value: 'GPL'
       }]
-      ,default: 1
+      ,default: 0
     },{
       type: 'checkbox',
       name: 'features',
       message: 'Please choose additional features',
       choices:[{
-        name: 'Modernizr',
-        value: 'includeModernizr',
+        name: 'Feature 1',
+        value: 'includeFeature1',
         checked: false
       },{
-        name: 'Respond',
-        value: 'includeRespond',
+        name: 'Feature 2',
+        value: 'includeFeature2',
         checked: false
       }]
     },{
       when: function (props) {
-        return props.flavour.indexOf('includeSass') !== -1;
+        return props.features.indexOf('includeFeature3') !== -1;
       },
       type: 'confirm',
       name: 'libsass',
@@ -76,8 +76,12 @@ var HeroGenerator = yeoman.generators.Base.extend({
     }];
 
     this.prompt(prompts, function (props) {
-      this.someOption = props.someOption;
       this.appName = props.appName;
+      this.authName = props.authName;
+      this.authEmail = props.authEmail;
+      this.projectType = props.projectType;
+      this.license = props.license;
+      this.features = props.features;
       done();
     }.bind(this));
   },
@@ -123,7 +127,7 @@ var HeroGenerator = yeoman.generators.Base.extend({
       
       // Scaffolding the project build files
       this.dest.mkdir('build');
-      this.template('_README.md', 'README.md', context);
+      this.template('build/_README.md', 'build/README.md', context);
       
       this.dest.mkdir('build/app');
       
@@ -165,6 +169,14 @@ var HeroGenerator = yeoman.generators.Base.extend({
       this.dest.mkdir('src/test');
       this.src.copy('src/test/_index-test.coffee', 'src/test/index-test.coffee');
       
+      // Helpers for any occassion
+      this.dest.mkdir('src/test/helpers');
+      this.template('src/test/helpers/_helper-test.coffee', 'src/test/helpers/helper-test.coffee', context);
+      
+      if(this.projectType==='expressApp'){
+        this.dest.mkdir('src/test/controllers');
+        this.template('src/test/controllers/_controller-test.coffee', 'src/test/controllers/controller-test.coffee', context);
+      }
       
     }
   },
