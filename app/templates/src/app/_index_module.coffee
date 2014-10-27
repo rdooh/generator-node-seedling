@@ -13,7 +13,7 @@
 #======================================
 # !Require modules
 #======================================
-thing = require 'thing'
+# thing = require 'thing'
 #======================================
 # End Require modules
 #======================================
@@ -37,29 +37,37 @@ _action = (input)->
 #======================================
 # !Main module
 #======================================
-exports = module.exports = (config)->
-  # !Logic to run at config time
-  console.log config
-  # !Method that will run every time this module is 'used' by Express
-  return (req, res, next) ->
-    # !Logic to run when used
-    console.log "Has config.flag" if config.flag
-    
-    # !Modifications to 'req' object - adding module-related object
-    req.appModule =
-      # !Example: process input
-      store: (data)->
-        res.appModule.data = data
-        return
+Main = ()->
+  # initialize an object with some example properties and methods
+  main = {}
+  
+  # Name property, may not be needed, if in object
+  main.name = ''
+  # Other properties
+  main.type = ''
+  main.size = 0
+  main.filters = []
+  
+  # Public methods - setters
+  
+  # Setters that returns full object chainably
+  main.ofType = (type) ->
+    @type = type
+    return this
+  
+  main.ofSize = (size) ->
+    @size = size
+    return this
+  
+  main.filterWith = (filterMethod) ->
+    @filters.push filterMethod
+    return this 
+  # End setters
 
-    # !Modifications to 'res' object - adding module-related object
-    res.appModule =
-      data: 'stuff'
-      
-    # !Call the next method in the chain
-    next()    
-    return
+  # Return the object
+  return main
 
+module.exports = Main
 
 #======================================
 # End Main module

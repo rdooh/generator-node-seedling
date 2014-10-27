@@ -136,15 +136,18 @@ var HeroGenerator = yeoman.generators.Base.extend({
       this.dest.mkdir('src');
       
       this.dest.mkdir('src/app');
-      this.template('src/app/_index_module.coffee', 'src/app/index.coffee', context);
       
       // Helpers for any occassion
       this.dest.mkdir('src/app/helpers');
       this.template('src/app/helpers/_helper.coffee', 'src/app/helpers/helper.coffee', context);
       
       if(this.projectType==='expressApp'){
+        this.template('src/app/_index_expresso.coffee', 'src/app/index.coffee', context);
+        
         this.dest.mkdir('src/app/controllers');
         this.template('src/app/controllers/_controller.coffee', 'src/app/controllers/controller.coffee', context);
+      }else if(this.projectType==='nodeModule'){
+        this.template('src/app/_index_module.coffee', 'src/app/index.coffee', context);
       }
       
       
@@ -173,15 +176,18 @@ var HeroGenerator = yeoman.generators.Base.extend({
       this.dest.mkdir('build/debug');
       
       this.dest.mkdir('src/test');
-      this.template('src/test/_index-test.coffee', 'src/test/index-test.coffee', context);
       
       // Helpers for any occassion
       this.dest.mkdir('src/test/helpers');
       this.template('src/test/helpers/_helper-test.coffee', 'src/test/helpers/helper-test.coffee', context);
       
       if(this.projectType==='expressApp'){
+        this.template('src/test/_index_expresso-test.coffee', 'src/test/index-test.coffee', context);
+        
         this.dest.mkdir('src/test/controllers');
         this.template('src/test/controllers/_controller-test.coffee', 'src/test/controllers/controller-test.coffee', context);
+      }else if(this.projectType==='nodeModule'){
+        this.template('src/test/_index_module-test.coffee', 'src/test/index-test.coffee', context);
       }
       
     }
