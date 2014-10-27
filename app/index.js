@@ -103,18 +103,23 @@ var HeroGenerator = yeoman.generators.Base.extend({
         authname: this.authName,
         authemail: this.authEmail,
         license: this.license,
-        year: year
+        year: year,
+        
+        // package.json optional packages
+        express: "",
+        bodyparser: ""
       };
       
       
       if(this.projectType==='expressApp'){
-        context.express = '
-    "express": "~4.0.0",
-    "body-parser": "~1.3.0",
-    '
+        context.express = '"express": "~4.0.0",'
+        context.bodyparser = '"body-parser": "~1.3.0",'
       }
       
       
+      if(this.projectType==='nodeModule'){
+        // context.express = '"express": "~4.0.0",'
+      }
       
       
       
