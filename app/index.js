@@ -105,6 +105,24 @@ var HeroGenerator = yeoman.generators.Base.extend({
         license: this.license,
         year: year
       };
+      
+      
+      if(this.projectType==='expressApp'){
+        context.express = '
+    "express": "~4.0.0",
+    "body-parser": "~1.3.0",
+    '
+      }
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       this.src.copy('gitignore', '.gitignore');
       this.src.copy('_gulpfile.js', 'gulpfile.js');
       this.template('_package.json', 'package.json', context);
